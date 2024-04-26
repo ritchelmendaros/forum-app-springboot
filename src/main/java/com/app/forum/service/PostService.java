@@ -24,11 +24,17 @@ public class PostService {
     }
 
     public List<Post> getPosts(int page) {
-        // Calculate the page index based on the requested page number
         int pageIndex = page > 0 ? page - 1 : 0;
-        // Fetch posts for the specified page using PageRequest
-        Page<Post> postPage = postRepository.findAll(PageRequest.of(pageIndex, 10)); // Assuming pageSize is 10
-        // Extract the content (posts) from the page
+        Page<Post> postPage = postRepository.findAll(PageRequest.of(pageIndex, 10));
         return postPage.getContent();
+    }
+
+    public boolean deletePost(Integer postId) {
+        try {
+            postRepository.deleteById(postId);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
