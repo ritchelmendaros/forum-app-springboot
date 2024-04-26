@@ -37,4 +37,12 @@ public class PostService {
             return false;
         }
     }
+
+    public boolean existsById(Integer postId) {
+        return postRepository.existsById(postId);
+    }
+
+    public Post findById(Integer postId) {
+        return postRepository.findById(postId).orElse(null);
+    }
 }
